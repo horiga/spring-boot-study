@@ -1,0 +1,8 @@
+app:
+  name : hogehoge
+  number : 123
+jdbc:
+  driver: com.mysql.jdbc.Driver
+  url: jdbc:log4jdbc:mysql://10.32.245.25:3306/devcenter?characterEncoding=UTF-8&amp;useServerPrepStmts=true&amp;cachePrepStmts=true&amp;connectTimeout=3000&amp;socketTimeout=7000
+  username: root
+  password: 1234
