@@ -1,14 +1,14 @@
 package org.horiga.study;
 
+import org.horiga.study.configuration.ApplicationSettings;
+import org.horiga.study.configuration.JdbcConnectionSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,7 +19,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @ComponentScan
 @EnableAutoConfiguration
 @EnableAsync
-@EnableConfigurationProperties({ApplicationSettings.class, JdbcConnectionSettings.class, ConfigurationSettings.class})
 public class Application implements CommandLineRunner {
 
 	private static Logger log = LoggerFactory.getLogger(Application.class);
@@ -28,8 +27,8 @@ public class Application implements CommandLineRunner {
 	 * with command line.
 	 * --run.env=prod
 	 */
-	@Value("${run.env}")
-	private String environment = "local";
+	//@Value("${run.env}")
+	private String environment = "dev";
 	
 	@Autowired
 	private ApplicationSettings applicationSettings;

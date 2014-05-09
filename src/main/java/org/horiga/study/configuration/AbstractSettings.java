@@ -1,4 +1,4 @@
-package org.horiga.study;
+package org.horiga.study.configuration;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;

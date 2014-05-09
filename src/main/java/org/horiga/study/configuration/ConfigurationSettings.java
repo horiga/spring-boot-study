@@ -1,4 +1,4 @@
-package org.horiga.study;
+package org.horiga.study.configuration;
 
 import lombok.Getter;
 import lombok.Setter;

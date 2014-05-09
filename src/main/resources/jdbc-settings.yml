@@ -1,0 +1,17 @@
+jdbc:
+  url: jdbc:log4jdbc:mysql://10.32.245.25:3306/test?characterEncoding=UTF-8&amp;useServerPrepStmts=true&amp;cachePrepStmts=true&amp;connectTimeout=3000&amp;socketTimeout=7000
+  username: root
+  password: 1234
+  maxActive: 3
+  maxIdle: 30
+  minIdle: 5
+  maxWait: 3000
+  validationQuery: /* ping */ select 1
+  testOnBorrow: false
+  testOnReturn: false
+  testWhileIdle: true
+  timeBetweenEvictionRunsMillis: 60000
+  numTestsPerEvictionRun: 5
+  minEvictableIdleTimeMillis: -1
+  
+  

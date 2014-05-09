@@ -26,7 +26,25 @@
 		<version>1.0.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-
+	<!-- 
+	<profiles>
+		<profile>
+			<id>develop</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<environment>dev</environment>
+			</properties>
+		</profile>
+		<profile>
+			<id>production</id>
+			<properties>
+				<environment>prod</environment>
+			</properties>
+		</profile>
+	</profiles> -->
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -42,6 +60,28 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- mybatis:mysql -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.2.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<!-- <version>1.4-p2</version> -->
+		</dependency>
+		
+		<!-- utils -->
 		<dependency>
 			<groupId>commons-lang</groupId>
 		    <artifactId>commons-lang</artifactId>
@@ -58,6 +98,11 @@
         	<version>1.12.6</version>
         	<scope>provided</scope>
         </dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-jndi</artifactId>
+			<version>8.1.14.v20131031</version>
+		</dependency>
 	</dependencies>
 
 	<!-- 
@@ -71,6 +116,18 @@
 	</build>
 	 -->
 	<build>
+		<!-- <finalName>${project.artifactId}-${project.version}</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources-${environment}</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources> -->
+		
         <plugins>
             <plugin>
             	<groupId>org.apache.maven.plugins</groupId>
@@ -86,6 +143,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        
     </build>
 	
 	<repositories>

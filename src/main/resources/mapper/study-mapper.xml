@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.horiga.study.repository.StudyRepository">
+	
+	<resultMap type="org.horiga.study.domain.Study" id="studyMap">
+	<result property="id" column="id" />
+	<result property="name" column="name" />
+	<result property="regdt" column="regdt" />
+	<result property="modidt" column="modidt" />
+</resultMap>
+	
+	<select id="findById" resultMap="studyMap">
+		select `id`, `name`, `regdt`, `modidt` from `study` where `id` = #{id}
+	</select>
+	
+	<insert id="insert">
+		insert into study(`id`, `name`, `regdt`) values(#{id}, #{name}, now())
+	</insert>
+	
+</mapper>
