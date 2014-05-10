@@ -1,5 +1,5 @@
 jdbc:
-  url: jdbc:log4jdbc:mysql://10.32.245.25:3306/test?characterEncoding=UTF-8&amp;useServerPrepStmts=true&amp;cachePrepStmts=true&amp;connectTimeout=3000&amp;socketTimeout=7000
+  url: jdbc:log4jdbc:mysql://testdb01:3306/test?characterEncoding=UTF-8&amp;useServerPrepStmts=true&amp;cachePrepStmts=true&amp;connectTimeout=3000&amp;socketTimeout=7000
   username: root
   password: 1234
   maxActive: 3
