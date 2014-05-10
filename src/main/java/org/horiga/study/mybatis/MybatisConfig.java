@@ -11,13 +11,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.stereotype.Component;
 
-@Component
-@MapperScan("org.horiga.study.repository")
+@Configuration
+@MapperScan("org.horiga.study")
 public class MybatisConfig {
 	
 	/*
@@ -30,15 +30,15 @@ public class MybatisConfig {
 	@Autowired
 	private JdbcConnectionSettings jdbcConnectionSettings;
 	
-	@Autowired
-	private DataSource dataSource;
-	
 	@Bean
 	public DataSource dataSource() {
 		
 		log.debug("> dataSource");
 		
 		BasicDataSource ds = new BasicDataSource();
+		
+		log.warn(">>>>>>>>>> jdbc:settings={}", jdbcConnectionSettings);
+		
 		
 		ds.setDriverClassName(jdbcConnectionSettings.getDriver());
 		ds.setUsername(jdbcConnectionSettings.getUsername());

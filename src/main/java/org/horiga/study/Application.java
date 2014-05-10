@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,6 +19,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
+@EnableConfigurationProperties({ApplicationSettings.class, JdbcConnectionSettings.class})
 @EnableAsync
 public class Application implements CommandLineRunner {
 
@@ -37,8 +39,6 @@ public class Application implements CommandLineRunner {
 	private JdbcConnectionSettings jdbcConnectionSettings;
 	
 	public static void main(String[] args) {
-
-		System.out.println("- startup application");
 
 		SpringApplicationBuilder sab = new SpringApplicationBuilder(
 				Application.class).addCommandLineProperties(true).showBanner(
