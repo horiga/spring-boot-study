@@ -11,17 +11,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.stereotype.Component;
 
-@Configuration
-@MapperScan(basePackages={"org.horiga.study"}, annotationClass=Mapper.class)
+@Component
+@MapperScan("org.horiga.study.repository")
 public class MybatisConfig {
+	
 	/*
 	 * @see
-	 *  https://github.com/hoserdude/spring-boot-mybatis-profile-sandbox/blob/master/src/main/java/sample/profile/DatabaseConfig.java
+	 *  http://mybatis.github.io/spring/mappers.html
 	 */
 	
 	private static Logger log = LoggerFactory.getLogger(MybatisConfig.class);
@@ -60,6 +61,8 @@ public class MybatisConfig {
 		
 		log.debug("> sqlSessionFactory");
 		
+//		return new SqlSessionFactoryBuilder().build(
+//				this.getClass().getResourceAsStream("classpath:mybatis-config.xml"));
 		
 		final SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean(); 
 		sqlSessionFactory.setDataSource(dataSource());
@@ -67,6 +70,7 @@ public class MybatisConfig {
 		sqlSessionFactory.setFailFast(true);
 		sqlSessionFactory.setMapperLocations(new Resource[] {new ClassPathResource("classpath:mapper/**/*-mapper.xml")});
 		sqlSessionFactory.setTypeHandlersPackage("org.horiga.study.mybatis.typehandler");
+		
 		return sqlSessionFactory.getObject();
 	}
 	

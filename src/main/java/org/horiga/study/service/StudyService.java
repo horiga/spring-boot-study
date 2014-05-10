@@ -9,7 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.horiga.study.configuration.ApplicationSettings;
 import org.horiga.study.configuration.ConfigurationSettings;
 import org.horiga.study.domain.Study;
-import org.horiga.study.repository.StudyRepository;
+import org.horiga.study.repository.StudyMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class StudyService {
 	private ConfigurationSettings configurations;
 	
 	@Autowired
-	private StudyRepository studyRepository;
+	private StudyMapper studyMapper;
 	
 	@Async
 	public Future<Void> execute() {
@@ -39,12 +39,12 @@ public class StudyService {
 	
 	@Async
 	public Future<Study> findOne( String id) {
-		return new AsyncResult<Study>(studyRepository.findById(id));
+		return new AsyncResult<Study>(studyMapper.findById(id));
 	}
 	
 	@Async
 	public Future<Void> addUser(String name) {
-		studyRepository.insert("s" + UUID.randomUUID().toString().replaceAll("-", ""), StringUtils.defaultString(name, "study.tarou"));
+		studyMapper.insert("s" + UUID.randomUUID().toString().replaceAll("-", ""), StringUtils.defaultString(name, "study.tarou"));
 		return new AsyncResult<Void>(null);
 	}
 	
