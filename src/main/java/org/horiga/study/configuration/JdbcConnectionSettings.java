@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Getter
 @Setter
-@ConfigurationProperties(value="jdbc", locations={"classpath:jdbc-settings.yml"})
+@ConfigurationProperties(value="jdbc")
 public class JdbcConnectionSettings extends AbstractSettings {
 	private String driver;
 	private String url;

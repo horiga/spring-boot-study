@@ -4,7 +4,6 @@ import java.util.UUID;
 import java.util.concurrent.Future;
 
 import org.apache.commons.lang.StringUtils;
-import org.horiga.study.configuration.ApplicationSettings;
 import org.horiga.study.domain.Study;
 import org.horiga.study.repository.StudyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +15,6 @@ import org.springframework.stereotype.Service;
 public class StudyService {
 	
 //	private static Logger log = LoggerFactory.getLogger(StudyService.class);
-	
-	@Autowired
-	private ApplicationSettings applicationSettings;
 	
 	@Autowired
 	private StudyMapper studyMapper;

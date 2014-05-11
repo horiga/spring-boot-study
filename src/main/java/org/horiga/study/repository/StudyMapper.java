@@ -3,7 +3,6 @@ package org.horiga.study.repository;
 import org.apache.ibatis.annotations.Param;
 import org.horiga.study.domain.Study;
 
-//@Repository
 public interface StudyMapper {
 	
 	//@Select("select `id`, `name`, `regdt`, `modidt` from `study` where `id` = #{id}")

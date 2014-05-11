@@ -17,7 +17,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 @Configuration
-@MapperScan("org.horiga.study")
+@MapperScan(basePackages="org.horiga.study.repository")
 public class MybatisConfig {
 	
 	/*
@@ -30,31 +30,42 @@ public class MybatisConfig {
 	@Autowired
 	private JdbcConnectionSettings jdbcConnectionSettings;
 	
+	@Autowired
 	private DataSource dataSource;
 	
 	@Bean
 	public DataSource dataSource() {
 		
-		log.debug("> dataSource");
+		BasicDataSource ds = new BasicDataSource();
 		
-		this.dataSource = new BasicDataSource();
+		/* FIXME: setup at properties */
+//		ds.setDriverClassName(jdbcConnectionSettings.getDriver());
+//		ds.setUsername(jdbcConnectionSettings.getUsername());
+//		ds.setPassword(jdbcConnectionSettings.getPassword());
+//		ds.setUrl(jdbcConnectionSettings.getUrl());
+//		ds.setMaxActive(jdbcConnectionSettings.getMaxActive());
+//		ds.setValidationQuery(jdbcConnectionSettings.getValidationQuery());
+//		ds.setTestOnBorrow(jdbcConnectionSettings.getTestOnBorrow());
+//		ds.setTestOnReturn(jdbcConnectionSettings.getTestOnReturn());
+//		ds.setTestWhileIdle(jdbcConnectionSettings.getTestWhileIdle());
+//		ds.setTimeBetweenEvictionRunsMillis(jdbcConnectionSettings.getTimeBetweenEvictionRunsMillis());
+//		ds.setNumTestsPerEvictionRun(jdbcConnectionSettings.getNumTestsPerEvictionRun());
+//		ds.setMinEvictableIdleTimeMillis(jdbcConnectionSettings.getMinEvictableIdleTimeMillis());
 		
-		log.warn(">>>>>>>>>> jdbc:settings={}", jdbcConnectionSettings);
+		ds.setDriverClassName("net.sf.log4jdbc.DriverSpy");
+		ds.setUsername("root");
+		ds.setPassword("1234");
+		ds.setUrl("jdbc:log4jdbc:mysql://testdb01:3306/test?characterEncoding=UTF-8&amp;useServerPrepStmts=true&amp;cachePrepStmts=true&amp;connectTimeout=3000&amp;socketTimeout=7000");
+		ds.setMaxActive(3);
+		ds.setValidationQuery("/* ping */ select 1");
+		ds.setTestOnBorrow(false);
+		ds.setTestOnReturn(false);
+		ds.setTestWhileIdle(true);
+		ds.setTimeBetweenEvictionRunsMillis(60000);
+		ds.setNumTestsPerEvictionRun(5);
+		ds.setMinEvictableIdleTimeMillis(-1);
 		
-		((BasicDataSource)dataSource).setDriverClassName(jdbcConnectionSettings.getDriver());
-		((BasicDataSource)dataSource).setUsername(jdbcConnectionSettings.getUsername());
-		((BasicDataSource)dataSource).setPassword(jdbcConnectionSettings.getPassword());
-		((BasicDataSource)dataSource).setUrl(jdbcConnectionSettings.getUrl());
-		((BasicDataSource)dataSource).setMaxActive(jdbcConnectionSettings.getMaxActive());
-		((BasicDataSource)dataSource).setValidationQuery(jdbcConnectionSettings.getValidationQuery());
-		((BasicDataSource)dataSource).setTestOnBorrow(jdbcConnectionSettings.getTestOnBorrow());
-		((BasicDataSource)dataSource).setTestOnReturn(jdbcConnectionSettings.getTestOnReturn());
-		((BasicDataSource)dataSource).setTestWhileIdle(jdbcConnectionSettings.getTestWhileIdle());
-		((BasicDataSource)dataSource).setTimeBetweenEvictionRunsMillis(jdbcConnectionSettings.getTimeBetweenEvictionRunsMillis());
-		((BasicDataSource)dataSource).setNumTestsPerEvictionRun(jdbcConnectionSettings.getNumTestsPerEvictionRun());
-		((BasicDataSource)dataSource).setMinEvictableIdleTimeMillis(jdbcConnectionSettings.getMinEvictableIdleTimeMillis());
-		
-		return dataSource;
+		return ds;
 	}
 	
 	@Bean
@@ -67,9 +78,10 @@ public class MybatisConfig {
 		
 		final SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean(); 
 		sqlSessionFactory.setDataSource(dataSource());
-		sqlSessionFactory.setConfigLocation(new ClassPathResource("classpath:mybatis-config.xml"));
+		sqlSessionFactory.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
 		sqlSessionFactory.setFailFast(true);
-		sqlSessionFactory.setMapperLocations(new Resource[] {new ClassPathResource("classpath:mapper/**/*-mapper.xml")});
+		Resource mapperResource = new ClassPathResource("mapper/study-mapper.xml");
+		sqlSessionFactory.setMapperLocations(new Resource[] {mapperResource});
 		sqlSessionFactory.setTypeHandlersPackage("org.horiga.study.mybatis.typehandler");
 		
 		return sqlSessionFactory.getObject();

@@ -9,7 +9,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,7 +18,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
-@EnableConfigurationProperties({ApplicationSettings.class, JdbcConnectionSettings.class})
 @EnableAsync
 public class Application implements CommandLineRunner {
 
@@ -52,19 +50,14 @@ public class Application implements CommandLineRunner {
 	}
 
 	private static void dbg(SpringApplication sa) {
-
-		for (ApplicationListener<?> l : sa.getListeners()) {
+		for (ApplicationListener<?> l : sa.getListeners())
 			log.info("sa.applicationListener={}", l.getClass().getName());
-		}
 
-		for (ApplicationContextInitializer<?> i : sa.getInitializers()) {
-			log.info("sa.applicationContextInitializer={}, ", i.getClass()
-					.getName());
-		}
+		for (ApplicationContextInitializer<?> i : sa.getInitializers())
+			log.info("sa.applicationContextInitializer={}, ", i.getClass().getName());
 
-		for (Object s : sa.getSources()) {
+		for (Object s : sa.getSources())
 			log.info("sa.source={}, ", s.getClass().getName());
-		}
 	}
 
 	@Override

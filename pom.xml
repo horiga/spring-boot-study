@@ -60,6 +60,11 @@
     		<groupId>org.springframework.boot</groupId>
     		<artifactId>spring-boot-starter-jetty</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-jndi</artifactId>
+			<version>8.1.14.v20131031</version>
+		</dependency>
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -92,6 +97,12 @@
 			<!-- <version>1.4-p2</version> -->
 		</dependency>
 		
+		<dependency>
+            <groupId>net.sf.log4jdbc</groupId>
+            <artifactId>log4jdbc4</artifactId>
+            <version>1.2B2</version>
+        </dependency>
+        
 		<!-- utils -->
 		<dependency>
 			<groupId>commons-lang</groupId>
@@ -110,9 +121,9 @@
         	<scope>provided</scope>
         </dependency>
 		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-jndi</artifactId>
-			<version>8.1.14.v20131031</version>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<!-- <version>2.3</version> -->
 		</dependency>
 	</dependencies>
 
