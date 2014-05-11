@@ -30,30 +30,31 @@ public class MybatisConfig {
 	@Autowired
 	private JdbcConnectionSettings jdbcConnectionSettings;
 	
+	private DataSource dataSource;
+	
 	@Bean
 	public DataSource dataSource() {
 		
 		log.debug("> dataSource");
 		
-		BasicDataSource ds = new BasicDataSource();
+		this.dataSource = new BasicDataSource();
 		
 		log.warn(">>>>>>>>>> jdbc:settings={}", jdbcConnectionSettings);
 		
+		((BasicDataSource)dataSource).setDriverClassName(jdbcConnectionSettings.getDriver());
+		((BasicDataSource)dataSource).setUsername(jdbcConnectionSettings.getUsername());
+		((BasicDataSource)dataSource).setPassword(jdbcConnectionSettings.getPassword());
+		((BasicDataSource)dataSource).setUrl(jdbcConnectionSettings.getUrl());
+		((BasicDataSource)dataSource).setMaxActive(jdbcConnectionSettings.getMaxActive());
+		((BasicDataSource)dataSource).setValidationQuery(jdbcConnectionSettings.getValidationQuery());
+		((BasicDataSource)dataSource).setTestOnBorrow(jdbcConnectionSettings.getTestOnBorrow());
+		((BasicDataSource)dataSource).setTestOnReturn(jdbcConnectionSettings.getTestOnReturn());
+		((BasicDataSource)dataSource).setTestWhileIdle(jdbcConnectionSettings.getTestWhileIdle());
+		((BasicDataSource)dataSource).setTimeBetweenEvictionRunsMillis(jdbcConnectionSettings.getTimeBetweenEvictionRunsMillis());
+		((BasicDataSource)dataSource).setNumTestsPerEvictionRun(jdbcConnectionSettings.getNumTestsPerEvictionRun());
+		((BasicDataSource)dataSource).setMinEvictableIdleTimeMillis(jdbcConnectionSettings.getMinEvictableIdleTimeMillis());
 		
-		ds.setDriverClassName(jdbcConnectionSettings.getDriver());
-		ds.setUsername(jdbcConnectionSettings.getUsername());
-		ds.setPassword(jdbcConnectionSettings.getPassword());
-		ds.setUrl(jdbcConnectionSettings.getUrl());
-		ds.setMaxActive(jdbcConnectionSettings.getMaxActive());
-		ds.setValidationQuery(jdbcConnectionSettings.getValidationQuery());
-		ds.setTestOnBorrow(jdbcConnectionSettings.getTestOnBorrow());
-		ds.setTestOnReturn(jdbcConnectionSettings.getTestOnReturn());
-		ds.setTestWhileIdle(jdbcConnectionSettings.getTestWhileIdle());
-		ds.setTimeBetweenEvictionRunsMillis(jdbcConnectionSettings.getTimeBetweenEvictionRunsMillis());
-		ds.setNumTestsPerEvictionRun(jdbcConnectionSettings.getNumTestsPerEvictionRun());
-		ds.setMinEvictableIdleTimeMillis(jdbcConnectionSettings.getMinEvictableIdleTimeMillis());
-		
-		return ds;
+		return dataSource;
 	}
 	
 	@Bean

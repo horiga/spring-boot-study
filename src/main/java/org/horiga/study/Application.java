@@ -40,9 +40,9 @@ public class Application implements CommandLineRunner {
 	
 	public static void main(String[] args) {
 
-		SpringApplicationBuilder sab = new SpringApplicationBuilder(
-				Application.class).addCommandLineProperties(true).showBanner(
-				false);
+		SpringApplicationBuilder sab = new SpringApplicationBuilder(Application.class)
+				.addCommandLineProperties(true)
+				.showBanner(false);
 		
 		dbg(sab.application());
 
